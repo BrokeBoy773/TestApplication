@@ -1,0 +1,20 @@
+services:
+  backend:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+
+  db:
+    image: postgres:latest
+    environment:
+        POSTGRES_DB: testdb
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: '7034'
+    ports:
+        - "5432:5432"
+    volumes:
+        - postgres_data:/var/lib/postgresql/data
+   
+volumes:
+  postgres_data:
